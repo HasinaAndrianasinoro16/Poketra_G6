@@ -2,7 +2,7 @@ package Bdd;
 import java.sql.*;
 public class Connexion {
     public Connection connecte () {
-         String url = "jdbc:postgresql://localhost:5432/stock";
+         String url = "jdbc:postgresql://localhost:5432/poketra";
         String user = "postgres";
         String password = "1762";
         Connection con = null;

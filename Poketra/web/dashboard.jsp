@@ -22,11 +22,9 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="index.jsp" class="nav-link " aria-current="page">insertion d'un look</a></li>
+        <li class="nav-item"><a href="formulaireMatiereCtrl" class="nav-link">insertion d'une nouvelle matiere</a></li>
+        <li class="nav-item"><a href="insertMatierectrl" class="nav-link">voir les matieres</a></li>
       </ul>
     </header>
     </body>

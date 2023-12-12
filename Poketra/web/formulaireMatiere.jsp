@@ -4,6 +4,8 @@
     Author     : toxic
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.Look"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="dashboard.jsp" %>
 <!DOCTYPE html>
@@ -16,23 +18,31 @@
     <link rel="stylesheet" href="./assets/style/title.css">
     <link rel="stylesheet" href="./assets/dist/css/bootstrap.min.css">
     </head>
+    <%
+        ArrayList<Look> lk = (ArrayList<Look>) request.getAttribute("look");
+    %>
     <body class="container" >
         <h1 class="text-center" >Projet poketra</h1>
-        <h5  class="text-center">insertion d'un nouveau look</h5>
+        <h5  class="text-center">Voir les matiere reliees au look</h5>
         <div class="my-4"></div>
-        <form action="Formlook" method="post" class="needs-validation" novalidate>
+        <form action="FormResultat" method="post" class="needs-validation" novalidate>
             <div class="row g-3 justify-content-center">
-                 <div class="col-sm-6">
-                <label for="lk" class="form-label">insertion du nouveau look</label>
-                <input type="text" class="form-control" id="lk" name="lk" placeholder="entrer un look" required>
-                <div class="invalid-feedback">
-                  Veuillez inserez une quantite.
-                </div>
-              </div>
+                <div class="col-sm-6">
+          <label for="alrg" class="form-label">Look</label>
+          <select class="form-select" id="art" name="art" required>
+            <option value="">Look...</option>
+            <% for(int i =0; i < lk.size(); i++) { %>
+            <option value="<%= lk.get(i).getIdLook() %>"><%= lk.get(i).getLook() %></option>
+            <% } %>
+          </select>
+          <div class="invalid-feedback">
+            Veuiller choisir un look.
+          </div>
+        </div>
             </div>
             <div class="my-4"></div>
             <center>
-                <input type="submit" class="text-center btn btn-success btn-lg" name="name" value="creer le look">
+                <input type="submit" class="text-center btn btn-success btn-lg" name="name" value="Voir les matieres">
             </center>
         </form>
     </body>

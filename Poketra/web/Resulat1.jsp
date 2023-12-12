@@ -4,6 +4,8 @@
     Author     : toxic
 --%>
 
+<%@page import="Model.TypeMatiere"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="dashboard.jsp" %>
 <!DOCTYPE html>
@@ -16,25 +18,31 @@
     <link rel="stylesheet" href="./assets/style/title.css">
     <link rel="stylesheet" href="./assets/dist/css/bootstrap.min.css">
     </head>
+    <%
+        ArrayList<TypeMatiere> tm = (ArrayList<TypeMatiere>) request.getAttribute("matiere");
+    %>
     <body class="container" >
         <h1 class="text-center" >Projet poketra</h1>
-        <h5  class="text-center">insertion d'un nouveau look</h5>
+        <h5  class="text-center">Resultat demander</h5>
         <div class="my-4"></div>
-        <form action="Formlook" method="post" class="needs-validation" novalidate>
-            <div class="row g-3 justify-content-center">
-                 <div class="col-sm-6">
-                <label for="lk" class="form-label">insertion du nouveau look</label>
-                <input type="text" class="form-control" id="lk" name="lk" placeholder="entrer un look" required>
-                <div class="invalid-feedback">
-                  Veuillez inserez une quantite.
-                </div>
-              </div>
-            </div>
-            <div class="my-4"></div>
-            <center>
-                <input type="submit" class="text-center btn btn-success btn-lg" name="name" value="creer le look">
-            </center>
-        </form>
+        <table class="table table-striped text-center">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">code matiere</th>
+            <th scope="col">matiere</th>
+          </tr>
+          </thead>
+          <tbody>
+              <% for(int i =0 ; i < tm.size(); i++) {%>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= tm.get(i).getIdMatiere() %></td>
+            <td><%=tm.get(i).getMatiere() %></td>
+          </tr>
+          <% } %>
+          </tbody>
+        </table>
     </body>
      <script src="./assets/js/form-validation.js"></script>
 </html>
