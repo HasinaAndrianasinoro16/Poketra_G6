@@ -39,11 +39,14 @@ public class FormResultat extends HttpServlet {
         PrintWriter out = response.getWriter();
         Connexion co = new Connexion();
         String look = request.getParameter("art");
+        Look l = new Look();
         TypeMatiere tm = new TypeMatiere();
         try {
             Connection c = co.connecte();
             ArrayList<TypeMatiere> tab = tm.getTypeMatiereByLook(c, look);
+            String ok = l.getLookByID(c, look).get(0).getIdLook();
             request.setAttribute("matiere", tab);
+            request.setAttribute("look", ok);
               RequestDispatcher dispatch = request.getRequestDispatcher("Resulat1.jsp");
         dispatch.forward(request, response);
         } catch (Exception e) {

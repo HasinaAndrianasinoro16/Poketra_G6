@@ -20,12 +20,16 @@
     </head>
     <%
         ArrayList<TypeMatiere> tm = (ArrayList<TypeMatiere>) request.getAttribute("matiere");
+        String look = (String) request.getAttribute("look");
     %>
-    <body class="container" >
-        <h1 class="text-center" >Projet poketra</h1>
-        <h5  class="text-center">Resultat demander</h5>
+    <body class="container-fluid bg-dark text-start text-light" >
+        <div class="py-4"></div>
+        <h1 class="text-center" >Resultat demander</h1>
+        <!--<h5  class="text-center">Resultat demander</h5>-->
         <div class="my-4"></div>
-        <table class="table table-striped text-center">
+        <p class="text-start h5">Liste des matieres appartenant au look : <%=look %> </p>
+        <div class="py-4"></div>
+        <table class="table table-dark  table-hover text-light text-center">
           <thead>
           <tr>
             <th scope="col">#</th>

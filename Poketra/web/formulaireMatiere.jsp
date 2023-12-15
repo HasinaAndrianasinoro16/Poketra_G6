@@ -21,15 +21,16 @@
     <%
         ArrayList<Look> lk = (ArrayList<Look>) request.getAttribute("look");
     %>
-    <body class="container" >
-        <h1 class="text-center" >Projet poketra</h1>
-        <h5  class="text-center">Voir les matiere reliees au look</h5>
-        <div class="my-4"></div>
+    <body class="container-fluid bg-dark text-start text-light" >
+        <div class="py-4"></div>
+        <h1 class="text-center" >Voir les matiere reliees au look</h1>
+        <!--<h5  class="text-center">Voir les matiere reliees au look</h5>-->
+        <div class="py-5"></div>
         <form action="FormResultat" method="post" class="needs-validation" novalidate>
             <div class="row g-3 justify-content-center">
                 <div class="col-sm-6">
-          <label for="alrg" class="form-label">Look</label>
-          <select class="form-select" id="art" name="art" required>
+          <label for="alrg" class="form-label h5">Choisir le Look:</label>
+          <select class="form-select" id="art" name="art" required style="height: 55px;">
             <option value="">Look...</option>
             <% for(int i =0; i < lk.size(); i++) { %>
             <option value="<%= lk.get(i).getIdLook() %>"><%= lk.get(i).getLook() %></option>
@@ -42,7 +43,7 @@
             </div>
             <div class="my-4"></div>
             <center>
-                <input type="submit" class="text-center btn btn-success btn-lg" name="name" value="Voir les matieres">
+                <input type="submit" class="text-center btn btn-warning btn-lg w-25" name="name" value="Voir les matieres">
             </center>
         </form>
     </body>

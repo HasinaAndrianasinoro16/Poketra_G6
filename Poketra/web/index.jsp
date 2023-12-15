@@ -16,23 +16,24 @@
     <link rel="stylesheet" href="./assets/style/title.css">
     <link rel="stylesheet" href="./assets/dist/css/bootstrap.min.css">
     </head>
-    <body class="container" >
-        <h1 class="text-center" >Projet poketra</h1>
-        <h5  class="text-center">insertion d'un nouveau look</h5>
-        <div class="my-4"></div>
+    <body class="container-fluid bg-dark text-start text-light" >
+        <div class="py-5"></div>
+        <h1 class="text-center" >Insertion d'un nouveau look</h1>
+        <!--<h5  class="text-center">insertion d'un nouveau look</h5>-->
+        <div class="py-4"></div>
         <form action="Formlook" method="post" class="needs-validation" novalidate>
             <div class="row g-3 justify-content-center">
-                 <div class="col-sm-6">
-                <label for="lk" class="form-label">insertion du nouveau look</label>
-                <input type="text" class="form-control" id="lk" name="lk" placeholder="entrer un look" required>
+                 <div class="col-sm-5">
+                <label for="lk" class="form-label h5">insertion du nouveau look :</label>
+                <input type="text" class="form-control" id="lk" name="lk" style="height: 55px;" placeholder="entrer un look" required>
                 <div class="invalid-feedback">
                   Veuillez inserez une quantite.
                 </div>
               </div>
             </div>
-            <div class="my-4"></div>
+            <div class="py-4"></div>
             <center>
-                <input type="submit" class="text-center btn btn-success btn-lg" name="name" value="creer le look">
+                <input type="submit" class="text-center btn btn-warning btn-lg w-25" name="name" value="inserer le look">
             </center>
         </form>
     </body>

@@ -49,4 +49,15 @@ public class Look extends ObjectBdd{
         }
         return liste;
     }
+    public ArrayList<Look> getLookByID (Connection c, String look)throws Exception{
+        String sql = " select * from look where idLook ='"+look+"'";
+        PreparedStatement ps = c.prepareStatement(sql);
+        ArrayList<Look> liste = new ArrayList<>();
+        ResultSet res = ps.executeQuery();
+        while(res.next()){
+            Look l = new Look(res.getString(1), res.getString(2));
+            liste.add(l);
+        }
+        return liste;
+    }
 }
