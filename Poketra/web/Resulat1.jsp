@@ -21,13 +21,14 @@
     <%
         ArrayList<TypeMatiere> tm = (ArrayList<TypeMatiere>) request.getAttribute("matiere");
         String look = (String) request.getAttribute("look");
+        String id = (String) request.getAttribute("id");
     %>
     <body class="container-fluid bg-dark text-start text-light" >
         <div class="py-4"></div>
         <h1 class="text-center" >Resultat demander</h1>
         <!--<h5  class="text-center">Resultat demander</h5>-->
         <div class="my-4"></div>
-        <p class="text-start h5">Liste des matieres appartenant au look : <%=look %> </p>
+        <p class="text-start h5">Liste des matieres appartenant au look :<span class="text-warning" > <%=look %> </span></p>
         <div class="py-4"></div>
         <table class="table table-dark  table-hover text-light text-center">
           <thead>
@@ -35,6 +36,7 @@
             <th scope="col">#</th>
             <th scope="col">code matiere</th>
             <th scope="col">matiere</th>
+            <th scope="col"> -- </th>
           </tr>
           </thead>
           <tbody>
@@ -43,6 +45,9 @@
             <th scope="row"><%= i+1 %></th>
             <td><%= tm.get(i).getIdMatiere() %></td>
             <td><%=tm.get(i).getMatiere() %></td>
+            <td>
+                <a href="Delete?look=<%= id %>&matiere=<%= tm.get(i).getIdMatiere() %>" class="btn btn-outline-danger btn-lg" > <i class="fas fa-trash-alt" ></i> </a>
+            </td>
           </tr>
           <% } %>
           </tbody>

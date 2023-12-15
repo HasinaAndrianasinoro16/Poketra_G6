@@ -5,11 +5,11 @@
 package ctrl;
 
 import java.sql.*;
-import java.util.*;
 import Bdd.*;
 import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toxic
  */
-@WebServlet(name = "FormResultat", urlPatterns = {"/FormResultat"})
-public class FormResultat extends HttpServlet {
+@WebServlet(name = "Delete", urlPatterns = {"/Delete"})
+public class Delete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,11 +38,19 @@ public class FormResultat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Connexion co = new Connexion();
-        String look = request.getParameter("art");
-        Look l = new Look();
+        String look = request.getParameter("look");
+        String matiere = request.getParameter("matiere");
         TypeMatiere tm = new TypeMatiere();
+        Look l = new Look();
         try {
+            
             Connection c = co.connecte();
+           String sql = "DELETE FROM matiere_look WHERE idlook = ? AND idmatiere = ?";
+           PreparedStatement ps = c.prepareStatement(sql);
+           ps.setString(1, look);
+           ps.setString(2, matiere);
+           int res = ps.executeUpdate();
+
             ArrayList<TypeMatiere> tab = tm.getTypeMatiereByLook(c, look);
             String ok = l.getLookByID(c, look).get(0).getLook();
             request.setAttribute("matiere", tab);
@@ -50,10 +58,11 @@ public class FormResultat extends HttpServlet {
             request.setAttribute("id", look);
               RequestDispatcher dispatch = request.getRequestDispatcher("Resulat1.jsp");
         dispatch.forward(request, response);
+            
         } catch (Exception e) {
             e.printStackTrace(out);
+            out.print(e);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
