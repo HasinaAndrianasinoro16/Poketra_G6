@@ -18,6 +18,35 @@ public class ObjectBdd {
         return sequence;
     }
     
+ //recuperer la consonnes pou l'id
+    public  String recupererConsonnes(String chaine) {
+        String voyelles = "aeiouAEIOU";
+        StringBuilder consonnesChaine = new StringBuilder();
+
+        for (int i = 0; i < chaine.length(); i++) {
+            char caractere = chaine.charAt(i);
+
+            if (voyelles.indexOf(caractere) == -1) {
+                consonnesChaine.append(caractere);
+            }
+        }
+
+        return consonnesChaine.toString();
+    }
+    
+// IdSequence
+    public String idSequence(Connection c) throws Exception{
+        String name = this.getClass().getSimpleName();
+        String id = "";
+        
+        if(this.getSequence(c).length() >= 2 ){
+            id = this.recupererConsonnes(name)+"0"+this.getSequence(c);
+        }else{
+            id = this.recupererConsonnes(name)+"00"+this.getSequence(c);
+        }
+        
+        return id;
+    }
 //fonction select * from tab
     public Vector<String> select (Connection c) throws Exception{
         Vector<String> liste = new Vector<>();
@@ -36,7 +65,7 @@ public class ObjectBdd {
         return liste;
     }
 
-//recupere le nom des tab pour avoir insert into tab (nomdecolone1,nomdecolone2) values
+//recupere le nom des tab pour avoir insert into tab (nomdecolone1,nomdecolone2, ...) values ...
     public Vector<String> getNamecolumns(Connection c) throws Exception,SQLException
     {
         Vector<String> vstring = new Vector<String>();

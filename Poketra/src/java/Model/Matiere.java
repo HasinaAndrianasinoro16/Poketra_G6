@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Matiere extends ObjectBdd {
     String IdMatiere;
-    String matiere;
+    String Matiere;
 
     public Matiere() {
     }
@@ -26,16 +26,16 @@ public class Matiere extends ObjectBdd {
     }
 
     public String getMatiere() {
-        return matiere;
+        return Matiere;
     }
 
     public void setMatiere(String matiere) {
-        this.matiere = matiere;
+        this.Matiere = matiere;
     }
 
     public Matiere(String IdMatiere, String matiere) {
         this.IdMatiere = IdMatiere;
-        this.matiere = matiere;
+        this.Matiere = matiere;
     }
     
     public ArrayList<Matiere> getMatiere (Connection c ) throws Exception{

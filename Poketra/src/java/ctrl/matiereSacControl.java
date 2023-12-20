@@ -4,13 +4,8 @@
  */
 package ctrl;
 
-import Bdd.*;
-import Model.Look;
-import Model.Matiere;
-import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toxic
  */
-@WebServlet(name = "FormMatiere", urlPatterns = {"/FormMatiere"})
-public class FormMatiere extends HttpServlet {
+@WebServlet(name = "matiereSacControl", urlPatterns = {"/matiereSacControl"})
+public class matiereSacControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,30 +31,17 @@ public class FormMatiere extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        Connexion co = new Connexion();
-        Matiere m = new Matiere();
-//        ObjectBdd om = new Matiere();
-        String matiere = request.getParameter("mt");
-        String [] look = request.getParameterValues("lk");
-        try {
-            Connection c = co.connecte();
-            String id = "M00"+m.getSequence(c);
-            ObjectBdd matire = new Matiere(id, matiere);
-            matire.insert(c);
-//            String sqil = " insert into matiere(idmatiere, matiere) values ('"+id+"','"+matiere+"') ";
-//            PreparedStatement psi = c.prepareStatement(sqil);
-//            int resi = psi.executeUpdate();
-//            om.insert(c);
-            for(int i = 0; i < look.length; i++){
-                String sql = "INSERT INTO matiere_look (idlook, idmatiere) VALUES ('"+look[i]+"', '"+id+"')";
-                PreparedStatement ps = c.prepareStatement(sql);
-                int res = ps.executeUpdate();
-            }
-        RequestDispatcher dispatch = request.getRequestDispatcher("insertMatierectrl");
-        dispatch.forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(out);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet matiereSacControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet matiereSacControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

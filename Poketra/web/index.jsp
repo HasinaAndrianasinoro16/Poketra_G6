@@ -16,26 +16,23 @@
     <link rel="stylesheet" href="./assets/style/title.css">
     <link rel="stylesheet" href="./assets/dist/css/bootstrap.min.css">
     </head>
-    <body class="container-fluid bg-dark text-start text-light" >
-        <div class="py-5"></div>
-        <h1 class="text-center" >Insertion d'un nouveau look</h1>
-        <!--<h5  class="text-center">insertion d'un nouveau look</h5>-->
-        <div class="py-4"></div>
-        <form action="Formlook" method="post" class="needs-validation" novalidate>
-            <div class="row g-3 justify-content-center">
-                 <div class="col-sm-5">
-                <label for="lk" class="form-label h5">insertion du nouveau look :</label>
-                <input type="text" class="form-control" id="lk" name="lk" style="height: 55px;" placeholder="entrer un look" required>
-                <div class="invalid-feedback">
-                  Veuillez inserez une quantite.
-                </div>
-              </div>
-            </div>
-            <div class="py-4"></div>
-            <center>
-                <input type="submit" class="text-center btn btn-warning btn-lg w-25" name="name" value="inserer le look">
-            </center>
-        </form>
+    <body class="bg-dark" >
+        <div class="container-fluid">
+            <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+          <img src="./assets/style/sac.jpg"  class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" loading="lazy" width="700" height="500">
+      </div>
+      <div class="col-lg-6 text-light">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Projet Groupe 6 poketra</h1>
+        <p class="lead">Projet de collaboration S3-S5 creation et vente de sac en tout genre et de toute sorte</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="creationSac.jsp"><button type="button" class="btn btn-warning btn-lg px-4 me-md-2">Enjoy the process >></button></a>
+          <!--<button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
     </body>
-     <script src="./assets/js/form-validation.js"></script>
 </html>

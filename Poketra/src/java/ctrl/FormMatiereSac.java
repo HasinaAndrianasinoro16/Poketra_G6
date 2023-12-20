@@ -4,12 +4,12 @@
  */
 package ctrl;
 
-import Bdd.*;
-import Model.Look;
-import Model.Matiere;
-import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import Model.*;
+import java.sql.*;
+import Bdd.*;
+import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toxic
  */
-@WebServlet(name = "FormMatiere", urlPatterns = {"/FormMatiere"})
-public class FormMatiere extends HttpServlet {
+@WebServlet(name = "FormMatiereSac", urlPatterns = {"/FormMatiereSac"})
+public class FormMatiereSac extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +38,22 @@ public class FormMatiere extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Connexion co = new Connexion();
+        Sac s = new Sac();
         Matiere m = new Matiere();
-//        ObjectBdd om = new Matiere();
-        String matiere = request.getParameter("mt");
-        String [] look = request.getParameterValues("lk");
+        Taille t = new Taille();
         try {
             Connection c = co.connecte();
-            String id = "M00"+m.getSequence(c);
-            ObjectBdd matire = new Matiere(id, matiere);
-            matire.insert(c);
-//            String sqil = " insert into matiere(idmatiere, matiere) values ('"+id+"','"+matiere+"') ";
-//            PreparedStatement psi = c.prepareStatement(sqil);
-//            int resi = psi.executeUpdate();
-//            om.insert(c);
-            for(int i = 0; i < look.length; i++){
-                String sql = "INSERT INTO matiere_look (idlook, idmatiere) VALUES ('"+look[i]+"', '"+id+"')";
-                PreparedStatement ps = c.prepareStatement(sql);
-                int res = ps.executeUpdate();
-            }
-        RequestDispatcher dispatch = request.getRequestDispatcher("insertMatierectrl");
-        dispatch.forward(request, response);
+            ArrayList<Sac> tabs = s.getSac(c);
+            ArrayList<Matiere> tabm = m.getMatiere(c);
+            ArrayList<Taille> tabt = t.getTailles(c);
+            request.setAttribute("taille", tabt);
+            request.setAttribute("sac", tabs);
+            request.setAttribute("matiere",tabm);
+            RequestDispatcher dispatch = request.getRequestDispatcher("insertionMatiereSac.jsp");
+            dispatch.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace(out);
+            out.print(e);
         }
     }
 

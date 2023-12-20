@@ -4,12 +4,11 @@
  */
 package ctrl;
 
-import Bdd.*;
-import Model.Look;
-import Model.Matiere;
-import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
+import java.sql.*;
+import Bdd.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toxic
  */
-@WebServlet(name = "FormMatiere", urlPatterns = {"/FormMatiere"})
-public class FormMatiere extends HttpServlet {
+@WebServlet(name = "Forminsertionmatiere", urlPatterns = {"/Forminsertionmatiere"})
+public class Forminsertionmatiere extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,29 +36,21 @@ public class FormMatiere extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String sac = request.getParameter("sac");
+        String matiere = request.getParameter("matiere");
+        String taille = request.getParameter("taille");
+        String qte = request.getParameter("qte");
         Connexion co = new Connexion();
-        Matiere m = new Matiere();
-//        ObjectBdd om = new Matiere();
-        String matiere = request.getParameter("mt");
-        String [] look = request.getParameterValues("lk");
         try {
-            Connection c = co.connecte();
-            String id = "M00"+m.getSequence(c);
-            ObjectBdd matire = new Matiere(id, matiere);
-            matire.insert(c);
-//            String sqil = " insert into matiere(idmatiere, matiere) values ('"+id+"','"+matiere+"') ";
-//            PreparedStatement psi = c.prepareStatement(sqil);
-//            int resi = psi.executeUpdate();
-//            om.insert(c);
-            for(int i = 0; i < look.length; i++){
-                String sql = "INSERT INTO matiere_look (idlook, idmatiere) VALUES ('"+look[i]+"', '"+id+"')";
-                PreparedStatement ps = c.prepareStatement(sql);
-                int res = ps.executeUpdate();
-            }
-        RequestDispatcher dispatch = request.getRequestDispatcher("insertMatierectrl");
-        dispatch.forward(request, response);
+           Connection c = co.connecte();
+           String sql = "INSERT INTO matiere_sac (idSac, idMatiere, idTaille, quantie) VALUES ('"+sac+"', '"+matiere+"', "+taille+", "+qte+")";
+           PreparedStatement ps = c.prepareStatement(sql);
+           int res = ps.executeUpdate();
+            RequestDispatcher dispatcher = request.getRequestDispatcher("FiltreMatiere");
+            dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace(out);
+            out.print(e);
         }
     }
 

@@ -1,0 +1,18 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Merienda-Bold
+font link: https://fonts.google.com/specimen/Merienda
+font author: Eduardo Tunni
+font author site: http://www.tipo.net.ar/
+
+
+icon designer: Elisabeta
+icon designer link: /ekimova_lisa
+        
+
+fontColor: {"hex":"#FFC017"}
+bgColor: {"hex":"#474D4C"}
+iconColor: {"hex":"#FFC017"}
+
+      
