@@ -27,10 +27,11 @@
         <div class="py-4"></div>
         <h1 class="text-center" >Resultat demander</h1>
         <!--<h5  class="text-center">Resultat demander</h5>-->
-        <div class="my-4"></div>
-        <p class=" container text-start h5">Liste des matieres appartenant au look :<span class="text-warning" > <%=look %> </span></p>
         <div class="py-4"></div>
-        <table class="table table-dark  table-hover text-light text-center">
+        <div class="py-3"></div>
+        <p class=" container text-start h5">Liste des matieres appartenant au look :<span class="text-warning h4" > <%=look %> </span></p>
+        <div class="py-4"></div>
+        <table class="table table-dark  table-hover text-light text-center ">
           <thead>
           <tr>
             <th scope="col">#</th>

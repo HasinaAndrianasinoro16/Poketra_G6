@@ -45,7 +45,7 @@ public class ObjectBdd {
             id = this.recupererConsonnes(name)+"00"+this.getSequence(c);
         }
         
-        return id;
+        return id.toUpperCase();
     }
 //fonction select * from tab
     public Vector<String> select (Connection c) throws Exception{
@@ -137,9 +137,36 @@ public class ObjectBdd {
         System.out.println(sql);
         stat.executeUpdate();
     }
+    //fonction update
+    
+//    public void Update(Connection c, String setcol, String setval, String refcol, String refval) throws Exception{
+//        String name = this.getClass().getSimpleName();
+//        String sql = "";
+//        Field[] f = this.getClass().getDeclaredFields();
+//        Object colset = null;
+//        String typeColset = null;
+//        Object colref = null;
+//        String typeColref = null;
+//        
+//        for(int i = 0; i < f.length; i++){
+//            if(f[i].getName().compareToIgnoreCase(setcol) == 0){
+//                colset = f[i].getName();
+//                typeColset = f[i].getType().getCanonicalName();
+//            }
+//            if(f[i].getName().compareToIgnoreCase(refcol) == 0){
+//                colref = f[i].getName();
+//                typeColref = f[i].getType().getCanonicalName();
+//            }
+//        }
+//        
+//        if(colset != null && setval != null && colref != null && refval != null){
+//            if()
+//        }
+//        
+//    }
     
     //fonction update set 
-    public void update(Connection c, String setcol, String setval, String refcol, String refval) throws Exception {
+    public void update1(Connection c, String setcol, String setval, String refcol, String refval) throws Exception {
         String name = this.getClass().getSimpleName();
         String sql = null;
         Field[] f = this.getClass().getDeclaredFields();
@@ -149,27 +176,36 @@ public class ObjectBdd {
         String typecolref = null;
     
         for (int i = 0; i < f.length; i++) {
+            
             if (f[i].getName().equalsIgnoreCase(setcol)) {
                 colset = f[i].getName();
-                typecolset = f[i].getType().getSimpleName();
+                typecolset = f[i].getType().getCanonicalName();
             }
+            
             if (f[i].getName().equalsIgnoreCase(refcol)) {
                 colref = f[i].getName();
-                typecolref = f[i].getType().getSimpleName();
+                typecolref = f[i].getType().getCanonicalName();
             }
         }
-    
-        if (typecolset != null && typecolset.equalsIgnoreCase("String") || typecolset.equalsIgnoreCase("Date")) {
+        
+        if(typecolref != null && typecolset != null){
+        
+        if (typecolset.compareToIgnoreCase("java.lang.String") == 0 || typecolset.compareToIgnoreCase("java.time.LocalDate") == 0) {
             sql = "UPDATE " + name + " SET " + colset + " = '" + setval + "' WHERE " + colref + " = " + refval;
         }
-        if (typecolref != null && (typecolref.equalsIgnoreCase("String") || typecolref.equalsIgnoreCase("Date"))) {
+        
+       else if ((typecolref.compareToIgnoreCase("java.lang.String") == 0 || typecolref.compareToIgnoreCase("java.time.LocalDate") == 0)) {
             sql = "UPDATE " + name + " SET " + colset + " = " + setval + " WHERE " + colref + " = '" + refval + "'";
         }
-        if (typecolref != null && typecolset != null &&
-                (typecolref.equalsIgnoreCase("String") && typecolset.equalsIgnoreCase("String")) ||
-                (typecolref.equalsIgnoreCase("Date") && typecolset.equalsIgnoreCase("Date"))) {
+        
+       else if (
+                (typecolref.compareToIgnoreCase("java.lang.String") == 0 && typecolset.compareToIgnoreCase("java.lang.String") == 0) ||
+                (typecolref.compareToIgnoreCase("java.time.LocalDate") == 0 && typecolset.compareToIgnoreCase("java.time.LocalDate") == 0)
+               ) {
             sql = "UPDATE " + name + " SET " + colset + " = '" + setval + "' WHERE " + colref + " = '" + refval + "'";
         }
+        }
+        
         if (sql == null) {
             throw new IllegalArgumentException("Invalid column types");
         }

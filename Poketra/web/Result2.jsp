@@ -27,12 +27,13 @@
         <!--<h5  class="text-center">Resultat demander</h5>-->
         <div class="my-4"></div>
         <div class="py-4"></div>
-        <table class="table table-dark  table-hover text-light text-center">
+        <p class="container text-start h5" >Les sacs fait a partir de la matiere: <span class="text-warning h4" ><%= tm.get(0).getMatiere() %></span></p>
+        <div class="py-4"></div>
+        <table class="table table-dark  table-hover text-light text-center container">
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">code matiere</th>
-            <th scope="col">matiere</th>
+            <th scope="col">code sac</th>
             <th scope="col">sac</th>
             <th scope="col">Taille</th>
             <th scope="col">Quantite</th>
@@ -43,11 +44,10 @@
               <% for(int i =0 ; i < tm.size(); i++) {%>
           <tr>
             <th scope="row"><%= i+1 %></th>
-            <td><%= tm.get(i).getIdMatiere() %></td>
-            <td><%=tm.get(i).getMatiere() %></td>
+            <td><%=tm.get(i).getIdSac() %></td>
             <td><%=tm.get(i).getNomSac() %></td>
             <td><%=tm.get(i).getTaille() %></td>
-            <td><%=tm.get(i).getQuantite() %> kg</td>
+            <td><%=tm.get(i).getQuantite() %></td>
           </tr>
           <% } %>
           </tbody>
