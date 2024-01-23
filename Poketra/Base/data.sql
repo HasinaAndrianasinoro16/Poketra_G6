@@ -56,7 +56,7 @@ create table PrixSac(
     taille varchar(255),
     PrixSac numeric(10,2)
 );
-
+--resaka reste
 create table matiere_qte(
     idMatiere_qte serial PRIMARY KEY,
     idMatiere VARCHAR(255) references matiere(idMatiere),
@@ -71,6 +71,7 @@ create table Historique(
     reste numeric(10,2)
 );
 
+--resaka benefice
 create sequence seqouvrier increment by 1;
 create table ouvrier(
     idOuvrier VARCHAR(255) primary KEY,
@@ -96,6 +97,21 @@ create table benefice(
     idSac varchar(255),
     taille varchar(255),
     benefice numeric(10,2)
+);
+--resaka promotion employe
+create sequence seqemploye increment by 1;
+create table employe(
+    idEmploye varchar(255) primary key,
+    nom varchar(255),
+    prenom varchar(255),
+    dtn date,
+    dateEmbauche date
+);
+
+create table poste(
+    idPoste serial primary key,
+    idOuvrier varchar(255) references ouvrier(idOuvrier),
+    idEmploye varchar(255) references employe(idEmploye)
 );
 
 --insertion
@@ -149,4 +165,18 @@ select
 FROM
     benefice b
 JOIN sac s on b.idsac = s.idsac;
+
+create or replace view postes AS
+select
+    p.idPoste,
+    p.idOuvrier,
+    o.ouvrier,
+    p.idEmploye,
+    e.nom,
+    e.prenom,
+    e.dateEmbauche,
+    e.dtn
+from poste p
+join ouvrier o on p.idOuvrier = o.idOuvrier
+join employe e on p.idEmploye = e.idEmploye;
 

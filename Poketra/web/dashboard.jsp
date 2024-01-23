@@ -50,6 +50,8 @@
                     <li><a class="dropdown-item h5" href="InsertOuvrier.jsp">Insertion ouvrier</a></li>
                     <li><a class="dropdown-item h5" href="PrixRevient">Prix Revient</a></li>
                     <li><a class="dropdown-item h5" href="SacOuvriers">Sac Ouvrier</a></li>
+                    <li><a class="dropdown-item h5" href="InsertEmploye.jsp">Insertion Employe</a></li>
+                    <li><a class="dropdown-item h5" href="InsertPoste">Insertion Poste</a></li>
                   </ul>
                 </li>
                 <div class="py-3"></div>
@@ -63,6 +65,7 @@
                     <li><a class="dropdown-item h5" href="./FiltrePrix.jsp">Filtre prix sac</a></li>
                     <li><a class="dropdown-item h5" href="Fabrication">Fabrication de Sac</a></li>
                     <li><a class="dropdown-item h5" href="FiltreBenefice.jsp">Filtre benefice</a></li>
+                    <li><a class="dropdown-item h5" href="ListeEmployeCtrl">Liste employe et taux horaire</a></li>
                   </ul>
                 </li>
               </ul>

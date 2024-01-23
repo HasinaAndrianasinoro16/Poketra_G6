@@ -64,7 +64,7 @@ public class Matiere_qte {
     }
     
     public ArrayList<Matiere_qte> getMatiereQte(Connection c, String idMatiere) throws Exception{
-        String sql = "select * from matiere_qte where idMatiere ='"+idMatiere+"'";
+        String sql = "select * from matiere_qte where idMatiere ='"+idMatiere+"' order by achat desc limit 1";
         ArrayList<Matiere_qte> liste = new ArrayList<>();
         PreparedStatement ps = c.prepareStatement(sql);
         ResultSet res = ps.executeQuery();
