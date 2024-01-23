@@ -99,5 +99,55 @@ public class Sac_matiere {
         }
         return liste;
     }
+    
+    public ArrayList<Sac_matiere> getSacMatiere(Connection c, String idSac) throws Exception{
+        String sql ="select * from sac_matiere where idSac = '"+idSac+"'";
+        PreparedStatement ps = c.prepareStatement(sql);
+        ResultSet res = ps.executeQuery();
+        ArrayList<Sac_matiere> liste = new ArrayList<>();
+        while(res.next()){
+            Sac_matiere sm = new Sac_matiere(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getDouble(6));
+            liste.add(sm);
+        }
+        return liste;
+    }
+    
+    public ArrayList<Sac_matiere> getSacMatiere(Connection c, String idSac, String taille) throws Exception{
+        String sql ="select * from sac_matiere where idSac = '"+idSac+"' and taille='"+taille+"'";
+        PreparedStatement ps = c.prepareStatement(sql);
+        ResultSet res = ps.executeQuery();
+        ArrayList<Sac_matiere> liste = new ArrayList<>();
+        while(res.next()){
+            Sac_matiere sm = new Sac_matiere(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getDouble(6));
+            liste.add(sm);
+        }
+        return liste;
+    }
+    
+ public double getPrixSac(Connection c, String idSac, String Taille) throws Exception {
+    PrixMatiere pm = new PrixMatiere();
+    double prix = 0.0;
+    ArrayList<Sac_matiere> listesac = this.getSacMatiere(c, idSac, Taille);
+    double totalPrixMatiere = 0.0; 
+    for (int i = 0; i < listesac.size(); i++) {
+        
+        ArrayList<PrixMatiere> listePrix = pm.getPrixMatiere(c, listesac.get(i).getIdMatiere());
+
+        for (int j = 0; j < listePrix.size(); j++) {
+//            System.out.println(listePrix.get(j).getPrix());
+            totalPrixMatiere += listePrix.get(j).getPrix();
+        }
+
+        double resultat = totalPrixMatiere * listesac.get(i).getQuantite();
+        prix += resultat;
+    }
+
+    return prix;
+}
+
+
+
+    
+ 
 }
 

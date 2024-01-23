@@ -45,6 +45,11 @@
                     <li><a class="dropdown-item h5" href="insertTaille.jsp">Taille</a></li>
                     <li><a class="dropdown-item h5" href="formulaireMatiereCtrl">Matiere</a></li>
                     <li><a class="dropdown-item h5" href="FormMatiereSac">Sac matiere</a></li>
+                    <li><a class="dropdown-item h5" href="PrixSacCtrl">Prix Sac</a></li>
+                    <li><a class="dropdown-item h5" href="AchatMatiere">Achat de Matiere</a></li>
+                    <li><a class="dropdown-item h5" href="InsertOuvrier.jsp">Insertion ouvrier</a></li>
+                    <li><a class="dropdown-item h5" href="PrixRevient">Prix Revient</a></li>
+                    <li><a class="dropdown-item h5" href="SacOuvriers">Sac Ouvrier</a></li>
                   </ul>
                 </li>
                 <div class="py-3"></div>
@@ -55,6 +60,9 @@
                   <ul class="dropdown-menu  ">
                     <li><a class="dropdown-item h5" href="insertMatierectrl">Voir matiere</a></li>
                     <li><a class="dropdown-item h5" href="FiltreMatiere">Filtre matiere sac</a></li>
+                    <li><a class="dropdown-item h5" href="./FiltrePrix.jsp">Filtre prix sac</a></li>
+                    <li><a class="dropdown-item h5" href="Fabrication">Fabrication de Sac</a></li>
+                    <li><a class="dropdown-item h5" href="FiltreBenefice.jsp">Filtre benefice</a></li>
                   </ul>
                 </li>
               </ul>

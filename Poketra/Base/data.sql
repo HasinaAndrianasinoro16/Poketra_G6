@@ -44,6 +44,74 @@ create table matiere_sac(
     quantie numeric(10,2)
 );
 
+create table prixmatiere(
+    idMatiere varchar(255) PRIMARY KEY,
+    prix numeric(10,2)
+);
+
+create table PrixSac(
+    idPrixSac serial PRIMARY KEY,
+    idsac varchar(255) references sac(idsac),
+    nomSac varchar(255),
+    taille varchar(255),
+    PrixSac numeric(10,2)
+);
+
+create table matiere_qte(
+    idMatiere_qte serial PRIMARY KEY,
+    idMatiere VARCHAR(255) references matiere(idMatiere),
+    qte numeric(10,2),
+    achat date
+);
+
+create table Historique(
+    idHistorique serial PRIMARY KEY,
+    dateh date,
+    idMatiere VARCHAR(255) references matiere(idMatiere),
+    reste numeric(10,2)
+);
+
+create sequence seqouvrier increment by 1;
+create table ouvrier(
+    idOuvrier VARCHAR(255) primary KEY,
+    ouvrier VARCHAR(255)
+);
+
+create table salaireOuvrier(
+    idSalaireOuvrier serial primary KEY,
+    idOuvrier varchar(255) references ouvrier(idOuvrier),
+    salaire numeric(10,2)
+);
+
+create table sacOuvrier(
+    idSacOuvrier serial primary KEY,
+    idSac varchar(255) references sac(idsac),
+    idOuvrier varchar(255) references ouvrier(idOuvrier),
+    nombre int,
+    temp numeric(10,2)
+);
+
+create table benefice(
+    idBenefice serial primary key,
+    idSac varchar(255),
+    taille varchar(255),
+    benefice numeric(10,2)
+);
+
+--insertion
+
+insert into prixmatiere (idMatiere, prix) values
+('M0010',25.5),
+('M0011',35.5),
+('M0012',45.5),
+('M0013',55.5),
+('M0014',65.5),
+('M0015',75.5),
+('M0016',85.5),
+('M0018',95.5);
+
+--view
+
 CREATE OR REPLACE VIEW sac_matiere AS
 SELECT
     sac.idSac,
@@ -71,4 +139,14 @@ JOIN
     look l ON ml.idLook = l.idLook
 JOIN
     Matiere m ON ml.idMatiere = m.idMatiere;
+
+create or replace view sacBenefice AS
+select 
+    s.idsac,
+    s.nomsac,
+    b.taille,
+    b.benefice
+FROM
+    benefice b
+JOIN sac s on b.idsac = s.idsac;
 
