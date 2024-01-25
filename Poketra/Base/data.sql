@@ -1,4 +1,4 @@
-create database poketra;
+acreate database poketra;
 \c poketra
 
 create sequence SEQLook increment by 1;
@@ -113,6 +113,22 @@ create table poste(
     idOuvrier varchar(255) references ouvrier(idOuvrier),
     idEmploye varchar(255) references employe(idEmploye)
 );
+--resaka statistique 
+
+create table client(
+    idClient serial primary key,
+    nom varchar(255),
+    prenom varchar(255),
+    genre int -- 1 si fille 0 si garcon
+);
+
+create table vente (
+    idVente serial primary key,
+    idClient int references client(idClient),
+    idSac VARCHAR (255) references sac(idSac),
+    nombre int,
+    dateAchat date
+);
 
 --insertion
 
@@ -127,6 +143,21 @@ insert into prixmatiere (idMatiere, prix) values
 ('M0018',95.5);
 
 --view
+
+create or replace view Ventes AS 
+select
+    c.idClient,
+    c.nom,
+    c.prenom,
+    c.genre,
+    v.idVente,
+    v.idSac,
+    s.nomSac,
+    v.nombre,
+    v.dateAchat
+from vente v
+join client c on v.idClient = c.idClient
+join sac s on v.idSac = s.idSac;
 
 CREATE OR REPLACE VIEW sac_matiere AS
 SELECT

@@ -44,11 +44,11 @@
               <% for(int i =0 ; i < liste.size(); i++) {%>
           <tr>
             <th scope="row"><%= i+1 %></th>
-            <td><%= liste.get(i).getIdEmploye() %></td>
-            <td><%= liste.get(i).getEmploye() %></td>
-            <td><%= liste.get(i).getPoste() %></td>
-            <td><%= liste.get(i).getDuree() %></td>
-            <td><%= liste.get(i).getTauxHoraire() %></td>
+            <td><%= liste.get(i).getIdEmployee()%></td>
+            <td><%= liste.get(i).getEmployee()%></td>
+            <td><%= liste.get(i).getPosition()%></td>
+            <td><%= liste.get(i).getDuration()%></td>
+            <td><%= liste.get(i).getHourlyRate()%></td>
           </tr>
           <% } %>
           </tbody>

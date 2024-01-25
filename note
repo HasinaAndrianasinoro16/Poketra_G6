@@ -7,3 +7,24 @@ manome reste anah quantite
 
 manome exception rah ts ampy le quantite "il faut 20 de plus"
 ----------------------------------------------------------------------------------------------------------------
+endrasana statistique de vente par genre 
+
+combien % vidiny sac ray firy pourcent ny lah sy ny vavy 
+ray tableau ray vente 
+
+misy vente :
+mapiditra client vavy sah lah ity olona ity nividy ity tam ity 
+
+je peut choisir le produit ou tout 
+
+calcul de pourcentage de sac par rapport au sac et au sac 
+
+fonction TotalVente(idSac)
+fonction TotalVenteGenre(idSac, int genre) somme de vente de se sac par rapport au genre 
+fonction pourcentage formule 100% --> TotalVente donc TotaleVenteGenre --> x 
+x = (TotalVente / totalVenteGenre )* 100
+
+view pour melanger la table client et vente
+
+on affiche dans le tableau le nombre de vente total le nombre de vente par genre d'un sac (fille garcon)
+---------------------------------------------------------------------------------------------------------------------

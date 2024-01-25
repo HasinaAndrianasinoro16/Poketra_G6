@@ -1,116 +1,123 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
-import java.sql.*;
-import java.util.*;
-import java.time.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-/**
- *
- * @author toxic
- */
+import java.util.ArrayList;
+
 public class ListeEmploye {
-    private String idEmploye;
-    private String employe;
-    private String poste;
-    private int duree;
-    private double TauxHoraire;
+    private String idEmployee;
+    private String employee;
+    private String position;
+    private int duration;
+    private double hourlyRate;
 
     public ListeEmploye() {
     }
 
-    public ListeEmploye(String idEmploye, String employe, String poste, int duree, double TauxHoraire) {
-        this.idEmploye = idEmploye;
-        this.employe = employe;
-        this.poste = poste;
-        this.duree = duree;
-        this.TauxHoraire = TauxHoraire;
+    public ListeEmploye(String idEmployee, String employee, String position, int duration, double hourlyRate) {
+        this.idEmployee = idEmployee;
+        this.employee = employee;
+        this.position = position;
+        this.duration = duration;
+        this.hourlyRate = hourlyRate;
     }
 
-    public String getIdEmploye() {
-        return idEmploye;
+    public String getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setIdEmploye(String idEmploye) {
-        this.idEmploye = idEmploye;
+    public void setIdEmployee(String idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
-    public String getEmploye() {
-        return employe;
+    public String getEmployee() {
+        return employee;
     }
 
-    public void setEmploye(String employe) {
-        this.employe = employe;
+    public void setEmployee(String employee) {
+        this.employee = employee;
     }
 
-    public String getPoste() {
-        return poste;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPoste(String poste) {
-        this.poste = poste;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public int getDuree() {
-        return duree;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDuree(int duree) {
-        this.duree = duree;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public double getTauxHoraire() {
-        return TauxHoraire;
+    public double getHourlyRate() {
+        return hourlyRate;
     }
 
-    public void setTauxHoraire(double TauxHoraire) {
-        this.TauxHoraire = TauxHoraire;
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
     }
-    
-    public static int diff(String dte) {
+
+    public static int calculateAge(String birthDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateNaissance = LocalDate.parse(dte, formatter);
-        LocalDate aujourdHui = LocalDate.now();
-        long differenceAnnees = ChronoUnit.YEARS.between(dateNaissance, aujourdHui);
-        int differenceAge = (int) differenceAnnees;
-        return differenceAge;
-    }
-    
-    public ArrayList<ListeEmploye> getListe (Connection c) throws Exception{
-        Postes ps = new Postes();
-        Poste po = new Poste();
-        SalaireOuvrier so = new SalaireOuvrier();
+        LocalDate birthDay = LocalDate.parse(birthDate, formatter);
         LocalDate today = LocalDate.now();
-        ArrayList<ListeEmploye> liste = new ArrayList<>();
-        ArrayList<SalaireOuvrier> listeSalaire = so.getSalaireOuvrier(c, "VRR006");
-        
-        ArrayList<Postes> postes = ps.getPostes(c);
-        for(Postes pes : postes){
-            ListeEmploye le = new ListeEmploye();
-            le.setIdEmploye(pes.getIdEmploye());
-            le.setEmploye(pes.getNom().toUpperCase() +" "+ pes.getPrenom());
-            le.setPoste(pes.getOuvrier());
-            int multiple = 1;
-            le.setDuree(diff(pes.getDateEmbauche()));
-            le.setTauxHoraire(multiple * listeSalaire.get(0).getSalaire());
-            if(pes.getIdOuvrier().equalsIgnoreCase("VRR006") && diff(pes.getDateEmbauche()) == 2){
-                le.setPoste("Ouvrier");
-                multiple = 2;
-                po.Update(c, pes.getIdEmploye(), "VR006", today.toString());
-                le.setTauxHoraire(multiple * listeSalaire.get(0).getSalaire() * diff(pes.getDateEmbauche()));
-                le.setDuree(diff(pes.getDateEmbauche()));
-            }else if(pes.getIdOuvrier().equalsIgnoreCase("VRR004") && diff(pes.getDateEmbauche()) >= 3){
-                le.setPoste("Expert");
-                multiple = 3;
-                po.Update(c, pes.getIdEmploye(), "VR004", today.toString());
-                le.setTauxHoraire(multiple * listeSalaire.get(0).getSalaire() * diff(pes.getDateEmbauche()));
-                le.setDuree(diff(pes.getDateEmbauche()));
+        return (int) ChronoUnit.YEARS.between(birthDay, today);
+    }
+
+    public ArrayList<ListeEmploye> getListe(Connection connection) throws Exception {
+        Postes positions = new Postes();
+        Poste positionUpdater = new Poste();
+        SalaireOuvrier salaryOuvrier = new SalaireOuvrier();
+        LocalDate today = LocalDate.now();
+        ArrayList<ListeEmploye> employeeList = new ArrayList<>();
+        ArrayList<SalaireOuvrier> salaryList = salaryOuvrier.getSalaireOuvrier(connection, "VRR006");
+
+        ArrayList<Postes> allPositions = positions.getPostes(connection);
+
+        for (Postes position : allPositions) {
+            ListeEmploye employee = new ListeEmploye();
+            employee.setIdEmployee(position.getIdEmploye());
+            employee.setEmployee(position.getNom().toUpperCase()+" "+position.getPrenom());
+            employee.setPosition(position.getOuvrier());
+            int multiplier = 1;
+
+            if ("VRR006".equalsIgnoreCase(position.getIdOuvrier())) {
+                multiplier = 2;
+            } else if ("VRR004".equalsIgnoreCase(position.getIdOuvrier())) {
+                multiplier = 3;
             }
-            liste.add(le);
-        } 
-        return liste;
+
+            employee.setDuration(calculateAge(position.getDateEmbauche()));
+            double hoursWorked = calculateAge(position.getDateEmbauche()) * 24 * 365;
+
+            employee.setHourlyRate(multiplier * salaryList.get(0).getSalaire() );
+
+            if ("VRR006".equalsIgnoreCase(position.getIdOuvrier()) && calculateAge(position.getDateEmbauche()) == 2) {
+                employee.setPosition("Ouvrier");
+                multiplier = 2;
+                positionUpdater.Update(connection, position.getIdEmploye(), "VR006", today.toString());
+                hoursWorked = calculateAge(position.getDateEmbauche()) * 24 * 365;
+                employee.setHourlyRate(multiplier * salaryList.get(0).getSalaire() );
+                employee.setDuration(calculateAge(position.getDateEmbauche()));
+            } else if ("VRR004".equalsIgnoreCase(position.getIdOuvrier()) && calculateAge(position.getDateEmbauche()) >= 3) {
+                employee.setPosition("Expert");
+                multiplier = 3;
+                positionUpdater.Update(connection, position.getIdEmploye(), "VR004", today.toString());
+                hoursWorked = calculateAge(position.getDateEmbauche()) * 24 * 365;
+                employee.setHourlyRate(multiplier * salaryList.get(0).getSalaire());
+                employee.setDuration(calculateAge(position.getDateEmbauche()));
+            }
+
+            employeeList.add(employee);
+        }
+        return employeeList;
     }
 }
